@@ -1,7 +1,5 @@
-\documentclass[tikz, convert={density=300,size=1040x1040,outext=.png}]{standalone}
-%\documentclass[tikz]{standalone}
-%\DeclareMathSizes{7}{7}{5}{4}
-%\DeclareMathSizes{5}{5}{3}{2}
+%\documentclass[tikz, convert={density=300,size=1040x1040,outext=.png}]{standalone}
+\documentclass[tikz]{standalone}
 
 % Custom key-value pairs (color dict):
 \def\addvalue#1#2{\expandafter\gdef\csname my@data@#1\endcsname{#2}}
@@ -42,18 +40,29 @@
 
     \clip (-2,-2) rectangle (2,2);
 
-    % \def\reducedcoordinates{\pgftransformcm{0.577}{0.666}{-0.577}{0.666}{\pgfpoint{0}{0}}}
+    %\def\reducedcoordinates{\pgftransformtriangle
+    %{\pgfpoint{0}{0}}
+    %{\pgfpoint{-0.5}{0.866}}
+    %{\pgfpoint{0.5}{0.866}}
+    %}
     \def\reducedcoordinates{\pgftransformcm{-0.5}{0.866}{0.5}{0.866}{\pgfpoint{0}{0}}}
     \reducedcoordinates
 
     \foreach \x in {-7,-6,...,7}{
         \foreach \y in {-7,-6,...,7}{
             \pgftransformshift{\pgfpoint{\x cm}{\y cm}}
-            \foreach \orbital in \atoms{
-                \node[draw,circle,inner sep=1pt, fill=\usevalue\orbital] at (\orbital) {};}
             \foreach \bond in {\bonds}{
                 \draw \bond;
             }
+        }
+    }
+    \pgftransformreset
+    \reducedcoordinates
+    \foreach \x in {-7,-6,...,7}{
+        \foreach \y in {-7,-6,...,7}{
+            \pgftransformshift{\pgfpoint{\x cm}{\y cm}}
+            \foreach \orbital in \atoms{
+                \node[draw,circle,inner sep=1pt, fill=\usevalue\orbital] at (\orbital) {};}
         }
     }
 
