@@ -1,5 +1,5 @@
-\documentclass[tikz, convert={density=400,outext=.png}]{standalone}
-%\documentclass[tikz]{standalone}
+%\documentclass[tikz, convert={density=400,outext=.png}]{standalone}
+\documentclass[tikz]{standalone}
 
 % Custom key-value pairs (color dict):
 \def\addvalue#1#2{\expandafter\gdef\csname my@data@#1\endcsname{#2}}
@@ -52,7 +52,7 @@
         \foreach \y in {-7,-6,...,7}{
             \pgftransformshift{\pgfpoint{\x cm}{\y cm}}
             \foreach \bond in {\bonds}{
-                \draw \bond;
+                \draw[opacity=0.2] \bond;
             }
         }
     }
@@ -62,8 +62,16 @@
         \foreach \y in {-7,-6,...,7}{
             \pgftransformshift{\pgfpoint{\x cm}{\y cm}}
             \foreach \orbital in \atoms{
-                \node[draw,circle,inner sep=1pt, fill=\usevalue\orbital] at (\orbital) {};}
+                \node[circle,inner sep=1pt, fill=white] at (\orbital) {};
+                \node[draw,circle,inner sep=1pt, fill=\usevalue\orbital, opacity=0.2] at (\orbital) {};}
         }
+    }
+    \foreach \bond in {\bonds}{
+        \draw \bond;
+    }
+
+    \foreach \orbital in \atoms{
+        \node[draw,circle,inner sep=1pt, fill=\usevalue\orbital] at (\orbital) {};
     }
 
     \draw[-stealth, draw=blue] (0,0) -- (0,1) node[pos=0.5, anchor=west, font=\scriptsize]{$\vec{a}_1$}; 
