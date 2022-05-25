@@ -1,9 +1,17 @@
-To compile to an image directly with `pdflatex`, add the convert instruction at the document definition: `\documentclass[tikz, convert={..., outext=.png}]{standalone}`. Then use the `-shell-escape` option on the call to the compiler, e.g.:
+You can easily compile these standalone images with `pdflatex`, e.g.:
 
-`pdflatex -shell-escape example.tex`
+`pdflatex example.tex`
 
-Example outputs:
+To produce a PNG image in linux, use ImageMagick's `convert` command, e.g.:
 
-![Honeycomb-Kagome lattice](images/example.png)
+`convert -density 400 -quality 90 example.pdf images/example.png`
 
-![Honeycomb-Kagome unit cell](images/unitcell.png)
+## Example outputs:
+
+| ![lattice](images/example.png) |
+|:--:|
+| *Honeycomb-Kagome lattice* |
+
+| ![unit-cell](images/unitcell.png) |
+|:--:| 
+| *Honeycomb-Kagome unit cell* |
